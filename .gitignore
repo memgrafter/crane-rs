@@ -1,0 +1,5 @@
+/target
+/.tools
+/mutants.out*
+/coverage
+/.bench

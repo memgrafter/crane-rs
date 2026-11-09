@@ -1,0 +1,10 @@
+# cargo-mutants config. Every exclusion needs a reason.
+exclude_re = [
+  # Equivalent mutants: the OR'ed operands never share set bits (shifted into disjoint
+  # ranges, or `acc << 6` has zero low bits), so `|` and `^` give identical results.
+  'replace \| with \^ in base64_(encode|decode)',
+  # Equivalent: looping while len <= n adds one more 8-byte chunk, which truncate(n) removes.
+  'replace < with <= in noise',
+  # Unobservable in tests: skipping fsync only matters after a power loss or kernel crash.
+  'replace durable -> io::Result<\(\)> with Ok\(\(\)\)',
+]
